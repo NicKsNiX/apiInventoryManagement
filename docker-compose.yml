@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "4002:4002"
+    environment:
+      - PORT=4002
+    volumes:
+      - ./uploads:/root/uploads
+    env_file:
+      - .env
+    # Uncomment the following if you need a database service
+    # depends_on:
+    #   - mssql
+    restart: unless-stopped
+
+  # MSSQL Service (optional - uncomment if needed)
+  # mssql:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #     - SA_PASSWORD=YourStrongPassword123!
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - mssql_data:/var/opt/mssql
+  #   restart: unless-stopped
+
+# volumes:
+#   mssql_data:
