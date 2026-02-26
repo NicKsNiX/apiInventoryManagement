@@ -29,12 +29,8 @@ RUN apk --no-cache add ca-certificates tzdata
 # Copy the binary from builder
 COPY --from=builder /app/apiInventoryManagement .
 
-# Copy uploads directory
+# Copy uploads directory if it exists
 RUN mkdir -p /root/uploads
-COPY --from=builder /app/uploads /root/uploads 2>/dev/null || true
-
-# Copy environment template if exists
-COPY .env* /root/ 2>/dev/null || true
 
 EXPOSE 4002
 
